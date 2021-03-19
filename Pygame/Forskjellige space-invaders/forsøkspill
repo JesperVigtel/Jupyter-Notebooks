@@ -1,0 +1,81 @@
+import pygame
+from pygame.locals import *
+
+
+#Starter programmer
+pygame.init()
+
+#Skjermen
+bredde = 700
+høyde = 450
+vindu = pygame.display.set_mode((bredde, høyde))
+pygame.display.set_caption("Space invaders")
+
+#Sette FPS
+FPS = 60
+FramePerSec = pygame.time.Clock()
+
+#Farger
+BLUE = (0, 0, 255)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+
+#Bakgrunn
+bg = pygame.image.load("./assets/bakgrunn-to.png")
+bg = pygame.transform.scale(bg, (bredde, høyde))
+vindu.blit(bg, (0,0))
+pygame.display.update()
+
+#Figurer
+RØDSKIP = pygame.image.load("./assets/rød-skip.png")
+BLÅSKIP = pygame.image.load("./assets/blå-skip.png")
+GRØNNSKIP = pygame.image.load("./assets/grønn-skip.png")
+
+RØDLASER = pygame.image.load("./assets/rød-laser.png")
+BLÅLASER = pygame.image.load("./assets/blå-laser.png")
+GRØNLASER = pygame.image.load("./assets/grønn-laser.png")
+
+
+#Lager spiller
+SPILLER = pygame.image.load("./assets/gul-skip.png")
+SPILLERLASER = pygame.image.load("./assets/gul-laser.png")
+spillerx = 200
+spillery = 300
+vindu.blit(SPILLER, (spillerx, spillery))
+pygame.display.update()
+hastighet = 10
+
+#Fiende
+class fiende(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        RØDSKIP = pygame.Surface((50,80))
+
+
+while True:
+    for e in pygame.event.get():
+        """if e.type == pygame.KEYDOWN:
+            vindu.blit(SPILLER, (spillerx,spillery))
+            pygame.display.update()
+           
+            if e.type == pygame.K_LEFT:
+                vindu.blit(bg, (0,0))
+                spillerx -= hastighet
+            if e.type == pygame.K_RIGHT:
+                vindu.blit(bg, (0,0))
+                spillerx += 10
+            if e.type == pygame.K_UP:
+                vindu.blit(bg, (0,0))
+                spillery -= hastighet
+            if e.type == pygame.K_DOWN:
+                vindu.blit(bg, (0,0))
+                spillery += hastighet
+            vindu.blit(SPILLER, (spillerx,spillery))
+            """
+        if e.type == pygame.QUIT:
+            pygame.quit()
+            
+    pygame.display.update()
+    FramePerSec.tick(FPS)
